@@ -13,4 +13,5 @@ public class Auth
     public bool IsBanned { get; set; }
     public string? PrimaryUserUID { get; set; }
     public User? PrimaryUser { get; set; }
+    public string? PersistentKey { get; set; }
 }
