@@ -82,7 +82,7 @@ public partial class MareHub : Hub<IMareHub>, IMareHub
 
         await Clients.Caller.Client_ReceiveServerMessage(MessageSeverity.Information, "Welcome to Snowcloak! Current Online Users: " + _systemInfoService.SystemInfoDto.OnlineUsers).ConfigureAwait(false);
         Context.Items["IsClientConnected"] = true;
-        return new ConnectionDto(new UserData(dbUser.UID, string.IsNullOrWhiteSpace(dbUser.Alias) ? null : dbUser.Alias))
+        return new ConnectionDto(new UserData(dbUser.UID, string.IsNullOrWhiteSpace(dbUser.Alias) ? null : dbUser.Alias, dbUser.HexString))
         {
             CurrentClientVersion = _expectedClientVersion,
             ServerVersion = IMareHub.ApiVersion,

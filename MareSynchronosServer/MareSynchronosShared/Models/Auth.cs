@@ -14,4 +14,5 @@ public class Auth
     public string? PrimaryUserUID { get; set; }
     public User? PrimaryUser { get; set; }
     public string? PersistentKey { get; set; }
+    public bool SpecialLogin { get; set; } = false;
 }

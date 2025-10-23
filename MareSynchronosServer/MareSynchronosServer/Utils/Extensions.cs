@@ -9,17 +9,17 @@ namespace MareSynchronosServer.Utils
     {
         public static GroupData ToGroupData(this Group group)
         {
-            return new GroupData(group.GID, group.Alias);
+            return new GroupData(group.GID, group.Alias, group.HexString);
         }
 
         public static UserData ToUserData(this GroupPair pair)
         {
-            return new UserData(pair.GroupUser.UID, pair.GroupUser.Alias);
+            return new UserData(pair.GroupUser.UID, pair.GroupUser.Alias, pair.GroupUser.HexString);
         }
 
         public static UserData ToUserData(this User user)
         {
-            return new UserData(user.UID, user.Alias);
+            return new UserData(user.UID, user.Alias, user.HexString);
         }
 
         public static GroupPermissions GetGroupPermissions(this Group group)

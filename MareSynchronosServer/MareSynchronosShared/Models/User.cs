@@ -17,4 +17,8 @@ public class User
     public DateTime LastLoggedIn { get; set; }
     [MaxLength(15)]
     public string Alias { get; set; }
+    public bool HexAllowed { get; set; } = false;
+
+    [MaxLength(6)]
+    public string? HexString { get; set; }
 }

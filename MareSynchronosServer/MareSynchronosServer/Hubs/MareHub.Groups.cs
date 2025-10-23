@@ -345,11 +345,12 @@ public partial class MareHub
         var joinedGroups = await DbContext.GroupPairs.CountAsync(g => g.GroupUserUID == UserUID).ConfigureAwait(false);
         var isBanned = await DbContext.GroupBans.AnyAsync(g => g.GroupGID == groupGid && g.BannedUserUID == UserUID).ConfigureAwait(false);
         var oneTimeInvite = await DbContext.GroupTempInvites.SingleOrDefaultAsync(g => g.GroupGID == groupGid && g.Invite == hashedPw).ConfigureAwait(false);
-
+        var effectiveMemberLimit = group?.SizeOverride ?? _maxGroupUserCount;
+        
         if (group == null
             || (!string.Equals(group.HashedPassword, hashedPw, StringComparison.Ordinal) && oneTimeInvite == null)
             || existingPair != null
-            || existingUserCount >= _maxGroupUserCount
+            || existingUserCount >= effectiveMemberLimit
             || !group.InvitesEnabled
             || joinedGroups >= _maxJoinedGroupsByUser
             || isBanned)

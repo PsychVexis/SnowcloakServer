@@ -490,8 +490,8 @@ public partial class MareHub
         {
             AccessType = GetAccessTypeDto(charaData.AccessType),
             ShareType = GetShareTypeDto(charaData.ShareType),
-            AllowedUsers = [.. charaData.AllowedIndividiuals.Where(k => !string.IsNullOrEmpty(k.AllowedUserUID)).Select(u => new UserData(u.AllowedUser.UID, u.AllowedUser.Alias))],
-            AllowedGroups = [.. charaData.AllowedIndividiuals.Where(k => !string.IsNullOrEmpty(k.AllowedGroupGID)).Select(k => new GroupData(k.AllowedGroup.GID, k.AllowedGroup.Alias))],
+            AllowedUsers = [.. charaData.AllowedIndividiuals.Where(k => !string.IsNullOrEmpty(k.AllowedUserUID)).Select(u => new UserData(u.AllowedUser.UID, u.AllowedUser.Alias, u.AllowedUser.HexString))],
+            AllowedGroups = [.. charaData.AllowedIndividiuals.Where(k => !string.IsNullOrEmpty(k.AllowedGroupGID)).Select(k => new GroupData(k.AllowedGroup.GID, k.AllowedGroup.Alias, k.AllowedGroup.HexString))],
             CustomizeData = charaData.CustomizeData,
             Description = charaData.Description,
             ExpiryDate = charaData.ExpiryDate ?? DateTime.MaxValue,

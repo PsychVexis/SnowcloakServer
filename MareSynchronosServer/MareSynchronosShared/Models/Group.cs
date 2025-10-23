@@ -16,4 +16,7 @@ public class Group
     public bool DisableSounds { get; set; }
     public bool DisableAnimations { get; set; }
     public bool DisableVFX { get; set; }
+    public int? SizeOverride { get; set; }
+    [MaxLength(6)]
+    public string? HexString { get; set; }
 }
