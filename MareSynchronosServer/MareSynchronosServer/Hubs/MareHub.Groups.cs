@@ -350,7 +350,7 @@ public partial class MareHub
         if (group == null
             || (!string.Equals(group.HashedPassword, hashedPw, StringComparison.Ordinal) && oneTimeInvite == null)
             || existingPair != null
-            || existingUserCount >= effectiveMemberLimit
+            || existingUserCount > effectiveMemberLimit
             || !group.InvitesEnabled
             || joinedGroups >= _maxJoinedGroupsByUser
             || isBanned)

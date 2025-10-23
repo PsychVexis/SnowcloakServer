@@ -17,7 +17,7 @@ namespace MareSynchronosServer.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.9")
+                .HasAnnotation("ProductVersion", "9.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -40,6 +40,10 @@ namespace MareSynchronosServer.Migrations
                     b.Property<string>("PrimaryUserUID")
                         .HasColumnType("character varying(10)")
                         .HasColumnName("primary_user_uid");
+
+                    b.Property<bool>("SpecialLogin")
+                        .HasColumnType("boolean")
+                        .HasColumnName("special_login");
 
                     b.Property<string>("UserUID")
                         .HasColumnType("character varying(10)")
@@ -458,6 +462,11 @@ namespace MareSynchronosServer.Migrations
                         .HasColumnType("text")
                         .HasColumnName("hashed_password");
 
+                    b.Property<string>("HexString")
+                        .HasMaxLength(6)
+                        .HasColumnType("character varying(6)")
+                        .HasColumnName("hex_string");
+
                     b.Property<bool>("InvitesEnabled")
                         .HasColumnType("boolean")
                         .HasColumnName("invites_enabled");
@@ -465,6 +474,10 @@ namespace MareSynchronosServer.Migrations
                     b.Property<string>("OwnerUID")
                         .HasColumnType("character varying(10)")
                         .HasColumnName("owner_uid");
+
+                    b.Property<int?>("SizeOverride")
+                        .HasColumnType("integer")
+                        .HasColumnName("size_override");
 
                     b.HasKey("GID")
                         .HasName("pk_groups");
@@ -630,6 +643,15 @@ namespace MareSynchronosServer.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("character varying(15)")
                         .HasColumnName("alias");
+
+                    b.Property<bool>("HexAllowed")
+                        .HasColumnType("boolean")
+                        .HasColumnName("hex_allowed");
+
+                    b.Property<string>("HexString")
+                        .HasMaxLength(6)
+                        .HasColumnType("character varying(6)")
+                        .HasColumnName("hex_string");
 
                     b.Property<bool>("IsAdmin")
                         .HasColumnType("boolean")

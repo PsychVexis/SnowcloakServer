@@ -22,11 +22,11 @@
 
   <ItemGroup>
     <PackageReference Include="Discord.Net" Version="3.18.0" />
-    <PackageReference Include="Meziantou.Analyzer" Version="2.0.219">
+    <PackageReference Include="Meziantou.Analyzer" Version="2.0.231">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.10" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="9.0.9" />
   </ItemGroup>
 
