@@ -70,11 +70,10 @@ public partial class MareHub
     {
         _logger.LogCallInfo(MareHubLogger.Args(dto));
 
-        var (inGroup, groupPair) = await TryValidateUserInGroup(dto.Group.GID, UserUID).ConfigureAwait(false);
+        var (inGroup, groupPair) = await TryValidateUserInGroup(dto.Group.GID).ConfigureAwait(false);
         if (!inGroup) return;
 
         var wasPaused = groupPair.IsPaused;
-
         groupPair.DisableSounds = dto.GroupPairPermissions.IsDisableSounds();
         groupPair.DisableAnimations = dto.GroupPairPermissions.IsDisableAnimations();
         groupPair.IsPaused = dto.GroupPairPermissions.IsPaused();
@@ -82,14 +81,8 @@ public partial class MareHub
 
         await DbContext.SaveChangesAsync().ConfigureAwait(false);
 
-        var groupPairs = DbContext.GroupPairs
-            .Include(p => p.GroupUser)
-            .Where(p => p.GroupGID == dto.Group.GID)
-            .ToList();
-
-        await Clients.Users(groupPairs.Select(p => p.GroupUserUID))
-            .Client_GroupPairChangePermissions(dto)
-            .ConfigureAwait(false);
+        var groupPairs = DbContext.GroupPairs.Include(p => p.GroupUser).Where(p => p.GroupGID == dto.Group.GID).ToList();
+        await Clients.Users(groupPairs.Select(p => p.GroupUserUID)).Client_GroupPairChangePermissions(dto).ConfigureAwait(false);
 
         var allUserPairs = await GetAllPairedClientsWithPauseState().ConfigureAwait(false);
         var self = await DbContext.Users.SingleAsync(u => u.UID == UserUID).ConfigureAwait(false);
