@@ -144,6 +144,7 @@ public partial class MareHub
             {
                 userToOther.OtherUser.Alias,
                 userToOther.IsPaused,
+                userToOther.OtherUser.HexString,
                 OtherIsPaused = otherEntry != null && otherEntry.IsPaused,
                 userToOther.OtherUserUID,
                 IsSynced = otherEntry != null,
@@ -152,7 +153,7 @@ public partial class MareHub
                 DisableOwnVFX = userToOther.DisableVFX,
                 DisableOtherAnimations = otherEntry == null ? false : otherEntry.DisableAnimations,
                 DisableOtherSounds = otherEntry == null ? false : otherEntry.DisableSounds,
-                DisableOtherVFX = otherEntry == null ? false : otherEntry.DisableVFX
+                DisableOtherVFX = otherEntry == null ? false : otherEntry.DisableVFX,
             };
 
         var results = await query.AsNoTracking().ToListAsync().ConfigureAwait(false);
@@ -170,7 +171,7 @@ public partial class MareHub
             otherPerm.SetDisableAnimations(c.DisableOtherAnimations);
             otherPerm.SetDisableSounds(c.DisableOtherSounds);
             otherPerm.SetDisableVFX(c.DisableOtherVFX);
-            return new UserPairDto(new(c.OtherUserUID, c.Alias), ownPerm, otherPerm);
+            return new UserPairDto(new(c.OtherUserUID, c.Alias, c.HexString), ownPerm, otherPerm);
         }).ToList();
     }
 
